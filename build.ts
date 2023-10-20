@@ -67,6 +67,17 @@ const html = `<!DOCTYPE html>
             a {
                 color: #fff;
             }
+            body > ul {
+                margin-top: 3em;
+                margin-bottom: 3em;
+            }
+            body > ul > li {
+                margin-bottom: 1em;
+            }
+            code {
+                background: #111;
+                padding: .1em .3em;
+            }
         </style>
     </head>
     <body>
