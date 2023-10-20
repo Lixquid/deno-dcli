@@ -1,0 +1,14 @@
+# SourceHut Build Manifest
+image: alpine/latest
+oauth: pages.sr.ht/PAGES:RW
+packages:
+    - hut
+environment:
+    site: dcli.lix.cx
+sources:
+    - https://github.com/lixquid/deno-dcli
+tasks:
+    - package: |
+          cd */scripts
+          tar czvf ../dist.tgz *
+          hut pages publish -d $site ../dist.tgz
