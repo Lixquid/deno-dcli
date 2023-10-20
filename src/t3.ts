@@ -1,9 +1,8 @@
-// t3: Text Template Transformer
+// Text Template Transformer
 //
 // Performs transformations on text files that contain template variables.
 
 import { parse } from "https://deno.land/std@0.204.0/flags/mod.ts";
-import { join } from "https://deno.land/std@0.204.0/path/mod.ts";
 
 const args = parse(Deno.args, {
     collect: ["ignore"],
@@ -62,10 +61,10 @@ async function scanDir(dir: string) {
     for await (const entry of Deno.readDir(dir)) {
         if (entry.isDirectory) {
             if (!ignoredDirs.has(entry.name)) {
-                await scanDir(join(dir, entry.name));
+                await scanDir(`${dir}/${entry.name}`);
             }
         } else {
-            files.add(join(dir, entry.name));
+            files.add(`${dir}/${entry.name}`);
         }
     }
 }

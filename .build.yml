@@ -3,12 +3,16 @@ image: alpine/latest
 oauth: pages.sr.ht/PAGES:RW
 packages:
     - hut
+    - deno
 environment:
     site: dcli.lix.cx
 sources:
     - https://github.com/lixquid/deno-dcli
 tasks:
+    - build: |
+          cd *
+          deno run -A build.ts
     - package: |
-          cd */scripts
+          cd */dist
           tar czvf ../dist.tgz *
           hut pages publish -d $site ../dist.tgz
