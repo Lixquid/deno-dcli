@@ -101,6 +101,7 @@ const html = `<!DOCTYPE html>
                 )
                 .join("\n")}
         </ul>
+        <p>Source code available <a href="https://github.com/lixquid/deno-dcli">here</a> under the MIT license.</p>
     </body>
 </html>
 `;
