@@ -1,14 +1,16 @@
-# SourceHut Build Manifest
+environment:
+    BUILD_SUBMITTER: hottub
+    site: dcli.lix.cx
 image: alpine/latest
 oauth: pages.sr.ht/PAGES:RW
 packages:
     - hut
-    - deno
-environment:
-    site: dcli.lix.cx
 sources:
     - https://github.com/lixquid/deno-dcli
 tasks:
+    # Note: Remove this once deno is in the main alpine repo
+    - prereq: |
+          sudo apk add deno --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community
     - build: |
           cd *
           deno run -A build.ts
