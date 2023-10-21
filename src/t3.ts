@@ -1,6 +1,12 @@
 // Text Template Transformer
 //
 // Performs transformations on text files that contain template variables.
+// Variables take the form TODO_XXX_, where XXX is the name of the variable;
+// the script will prompt the user for a value for each variable, and then
+// substitute the value in all files.
+
+// Note: join from std/path is not used due to the large increase in bundle
+// size.
 
 import { parse } from "https://deno.land/std@0.204.0/flags/mod.ts";
 
