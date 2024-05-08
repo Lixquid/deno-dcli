@@ -104,6 +104,18 @@ const html = `<!DOCTYPE html>
 		<p>Source code available <a href="https://github.com/lixquid/deno-dcli">here</a> under the MIT license.</p>
 	</body>
 </html>
+<!--
+
+
+DCLI Scripts:
+
+${scripts
+	.map(
+		({ filename, name, description }) => `${filename} - ${name}
+    ${description.replaceAll("\n", "\n    ")}`,
+	)
+	.join("\n")}
+-->
 `;
 
 await Deno.writeTextFile("dist/index.html", html);
