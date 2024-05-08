@@ -18,7 +18,7 @@ const args = parse(Deno.args, {
 	},
 });
 
-if (args["help"]) {
+if (args.help) {
 	console.log(`t3: Text Template Transformer
 
 Performs transformations on text files that contain template variables.
@@ -51,8 +51,8 @@ Options:
 	Deno.exit(0);
 }
 
-const verbose = args["verbose"];
-const ignoredDirs = new Set(args["ignore"]);
+const verbose = args.verbose;
+const ignoredDirs = new Set(args.ignore);
 
 if (verbose) {
 	console.log("Ignored directories:");
@@ -76,7 +76,7 @@ async function scanDir(dir: string) {
 }
 await scanDir(".");
 
-if (args["verbose"]) {
+if (args.verbose) {
 	console.log("Files to process:");
 	console.log(files);
 }
@@ -97,10 +97,12 @@ for await (const filename of files) {
 			const t = match[2];
 			if (t.startsWith("!")) {
 				const n = t.slice(1);
-				if (!placeholders.has(n)) {
-					placeholders.set(n, []);
+				const p = placeholders.get(n);
+				if (p) {
+					p.push(filename);
+				} else {
+					placeholders.set(n, [filename]);
 				}
-				placeholders.get(n)!.push(filename);
 			} else {
 				variables.add(t);
 			}
@@ -108,7 +110,7 @@ for await (const filename of files) {
 	}
 }
 
-if (args["verbose"]) {
+if (args.verbose) {
 	console.log("Variables:");
 	console.log(variables);
 	console.log("Placeholders:");
