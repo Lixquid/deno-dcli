@@ -2,7 +2,6 @@ import { join } from "https://deno.land/std@0.204.0/path/mod.ts";
 import { bundle } from "https://deno.land/x/emit@0.30.0/mod.ts";
 
 // Create the dist folder if it doesn't exist, or clean it if it does
-
 try {
 	await Deno.remove("dist", { recursive: true });
 } catch {
